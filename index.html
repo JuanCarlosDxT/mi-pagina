@@ -70,6 +70,19 @@ h1:hover {
 		box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
 		margin-bottom: 20px;
 }
+	button {
+		background: linear-gradient(135deg, #2563eb, #1e3a8a);
+		color: white;
+		border: none;
+		padding: 12px 25px;
+		border-radius: 10px;
+		cursor: pointer;
+		font-size: 16px;
+}
+
+	button:hover {
+	transform: scale(1.05);
+}
 	final {
 	font-size: 26px;
 	text-align: center;
@@ -96,6 +109,7 @@ h1:hover {
 	<audio controls loop style="width: 100%;">
 		<source src="lofi.mp3" type="audio/mpeg">
 	</audio>
+	<button onclick="activarAudio()">🔊 Activar música</button>
 </div>
 <p>Hola, soy Juan Carlos Diestra y esta es mi pagina personal, aquí comparto información de mi interes y actividades favoritas</p>
 <p>Soy estudiante del área de programación del instituto ISAM, y estoy aprendiendo nuevas tecnologias</p>
@@ -119,5 +133,21 @@ h1:hover {
 	<p>© 2026 Juan Carlos Diestra</p>
 	<p>Gracias por su visita</p>
 	<p>Huaral - Perú</p>
+</footer>
+<script>
+	function activarAudio() {
+		var audio = document.getElementById("musica");
+		var boton = document.querySelector("button");
+
+		if (audio.muted) {
+			audio.muted = false;
+			audio.play();
+			boton.textContent = "🔇 Silenciar";
+		} else {
+			audio.muted = true;
+			boton.textContent = "🔊 Activar música";
+		}
+	}
+</script>
 </body>
 </html>
