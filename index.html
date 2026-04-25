@@ -190,17 +190,15 @@ h1:hover {
 		var audio = document.getElementById("musica");
 		var boton = document.getElementById("btnAudio");
 
-		if (!estaSonando) {
-			audio.muted = false;
-			audio.play();
-			boton.textContent = "🔇 Silenciar";
-			estaSonando = true;
-		} else {
-			audio.muted = true;
-			boton.textContent = "🔊 Activar música";
-			estaSonando = false;
-		}
+		if (audio.muted === true) {
+		audio.muted = false;
+		audio.play();
+		boton.textContent = "🔇 Silenciar";
+	} else {
+		audio.muted = true;
+		boton.textContent = "🔊 Activar música";
 	}
+}
 	
 </script>
 	
