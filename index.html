@@ -151,7 +151,7 @@ h1:hover {
 <p>Soy estudiante del área de programación del instituto ISAM, y estoy aprendiendo nuevas tecnologias</p>
 </div>
 	
-	<img src="img2.jpg">
+	<img src="img2.jpg" alt="Imagen personal">
 
 <div class="card">
 	<div class="contenedor">
@@ -177,7 +177,7 @@ h1:hover {
 	</div>
 </div>
 	
-<img src="Lenguajes.jpg">
+<img src="Lenguajes.jpg" alt="Lenguajes de programación">
 	
 <footer>
 	<p>© 2026 Juan Carlos Diestra</p>
@@ -190,13 +190,15 @@ h1:hover {
 		var audio = document.getElementById("musica");
 		var boton = document.getElementById("btnAudio");
 
-		if (audio.muted) {
+		if (!estaSonando) {
 			audio.muted = false;
 			audio.play();
 			boton.textContent = "🔇 Silenciar";
+			estaSonando = true;
 		} else {
 			audio.muted = true;
 			boton.textContent = "🔊 Activar música";
+			estaSonando = false;
 		}
 	}
 	
