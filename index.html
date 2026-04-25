@@ -6,12 +6,12 @@
 	<title>trabajando con lenguaje html</title>
 	<style>
 		body {
-            background-color: #f3f4f6;
-		font-family: Arial, sans-serif;
-		color: #333;
-		max-width: 800px;
-		margin: 0 auto;
-		padding: 30px 20px;
+             background: linear-gradient(to right, #eef2ff, #f8fafc);
+			font-family: Arial, sans-serif;
+			color: #333;
+			max-width: 800px;
+			margin: 0 auto;
+			padding: 30px 20px;
 	}
 
 	h1 {
@@ -43,10 +43,12 @@ h1:hover {
 		margin-bottom: 15px;
 	}
 
-	ul, ol {
-		line-height: 2;
-		padding-left: 20px;
-	}
+	ul li, ol li {
+		background: #eef2ff;
+		margin-bottom: 8px;
+		padding: 8px;
+		border-radius: 6px;
+}
 
 	img {
 		display: block;
@@ -55,22 +57,19 @@ h1:hover {
 		max-width: 650px;
 		border-radius: 10px;
 		box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
+		transition: transform 0.3s ease;
 	}
+
+		img:hover {
+	transform: scale(1.03);
+}
 
 	audio {
 		width: 100%;
 		margin-top: 10px;
 	}
 
-	div {
-		text-align: center;
-		background: white;
-		padding: 20px;
-		border-radius: 10px;
-		box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
-		margin-bottom: 20px;
-}
-	button {
+		button {
 		background: linear-gradient(135deg, #2563eb, #1e3a8a);
 		color: white;
 		border: none;
@@ -78,12 +77,17 @@ h1:hover {
 		border-radius: 10px;
 		cursor: pointer;
 		font-size: 16px;
+		transition: all 0.3s ease;
 }
 
 	button:hover {
 	transform: scale(1.05);
+	box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
 }
-	final {
+	button:active {
+	transform: scale(0.95);
+}
+	.final {
 	font-size: 26px;
 	text-align: center;
 	margin-top: 40px;
@@ -92,7 +96,21 @@ h1:hover {
 	border-top: 2px solid #ddd;
 	padding-top: 15px;
 }
-		footer {
+
+	.card {
+	background: white;
+	padding: 20px;
+	border-radius: 12px;
+	box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+	margin-bottom: 25px;
+	transition: transform 0.2s;
+}
+
+	.card:hover {
+	transform: translateY(-5px);
+}
+		
+	footer {
 	margin-top: 50px;
 	padding: 20px;
 	text-align: center;
@@ -100,20 +118,81 @@ h1:hover {
 	color: white;
 	border-radius: 10px;
 }
+
+	.contenedor {
+	display: flex;
+	gap: 30px;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+.contenedor div {
+	flex: 1;
+	min-width: 200px;
+}
+
+	.scroll-buttons {
+	position: fixed;
+	right: 10px;
+	top: 50%;
+	transform: translateY(-50%);
+	background: #2563eb;
+	border-radius: 20px 0 0 20px;
+	padding: 10px 5px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+	z-index: 1000;
+}
+
+.scroll-buttons button {
+	background: white;
+	border: none;
+	border-radius: 50%;
+	width: 45px;
+	height: 45px;
+	cursor: pointer;
+	font-size: 20px;
+	box-shadow: 0px 2px 8px rgba(0,0,0,0.2);
+	margin: 2px 0;
+}
+
+	.scroll-buttons button:hover {
+	background: #ddd;
+}
+
+@media (min-width: 768px) {
+	.scroll-buttons {
+		display: none;
+	}
+}
 	</style>
+	
 </head>
 <body>
+	
 <h1>MI PAGINA PERSONAL</h1>
+
+<div class="card">	
 <h2>Música de fondo</h2>
-<div style="text-align:center; margin-top:20px;">
 	<audio id="musica" loop muted>
 	<source src="lofi.mp3" type="audio/mpeg">
 	</audio>
+	
 	<button onclick="activarAudio()">🔊 Activar música</button>
 </div>
+
+<div class="card">	
 <p>Hola, soy Juan Carlos Diestra y esta es mi pagina personal, aquí comparto información de mi interes y actividades favoritas</p>
 <p>Soy estudiante del área de programación del instituto ISAM, y estoy aprendiendo nuevas tecnologias</p>
-<img src="img2.jpg" style="width:100%; max-width:650px;">
+</div>
+	
+	<img src="img2.jpg">
+
+<div class="card">
+	<div class="contenedor">
+	<div>
 <h3>MIS PASATIEMPOS</h3>
 <ul>
 	<li>Programacion</li>
@@ -121,6 +200,9 @@ h1:hover {
 	<li>Escuchar música</li>
 	<li>Ver películas</li>
 </ul>
+</div>
+
+<div>
 <h3>Lenguajes que estoy aprendiendo</h3>
 <ol>
 	<li>HTML</li>
@@ -128,16 +210,27 @@ h1:hover {
 	<li>JAVA</li>
 	<li>PYTHON</li>
 </ol>
-<img src="Lenguajes.jpg" style="width:100%; max-width:650px;">
+	</div>
+	</div>
+</div>
+	
+<img src="Lenguajes.jpg">
+	
 <footer>
 	<p>© 2026 Juan Carlos Diestra</p>
 	<p>Gracias por su visita</p>
 	<p>Huaral - Perú</p>
 </footer>
+
+<div class="scroll-buttons">
+	<button onclick="irArriba()">⬆️</button>
+	<button onclick="irAbajo()">⬇️</button>
+</div>
+	
 <script>
 	function activarAudio() {
 		var audio = document.getElementById("musica");
-		var boton = document.querySelector("button");
+		var boton = document.getElementById("btnAudio");
 
 		if (audio.muted) {
 			audio.muted = false;
@@ -148,6 +241,20 @@ h1:hover {
 			boton.textContent = "🔊 Activar música";
 		}
 	}
+	function irArriba() {
+		window.scrollTo({
+			top: 0,
+			behavior: "smooth"
+		});
+	}
+
+	function irAbajo() {
+		window.scrollTo({
+			top: document.body.scrollHeight,
+			behavior: "smooth"
+		});
+	}
 </script>
+	
 </body>
 </html>
