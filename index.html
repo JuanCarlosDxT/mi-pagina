@@ -131,35 +131,43 @@ h1:hover {
 	min-width: 200px;
 }
 
-	.scroll-buttons {
+	.scroll-control {
 	position: fixed;
 	right: 10px;
 	top: 50%;
 	transform: translateY(-50%);
-	background: #2563eb;
-	border-radius: 20px 0 0 20px;
-	padding: 10px 5px;
+	width: 50px;
+	height: 120px;
+	background: #e5e7eb;
+	border-radius: 25px;
 	display: flex;
-	flex-direction: column;
-	gap: 10px;
-	box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
 	z-index: 1000;
+	user-select: none;
+	opacity: 0.8;
+	transition: opacity 0.3s;
 }
 
-.scroll-buttons button {
-	background: white;
-	border: none;
+.scroll-control:hover {
+	opacity: 1;
+}
+
+.scroll-thumb {
+	width: 35px;
+	height: 35px;
+	background: #2563eb;
 	border-radius: 50%;
-	width: 45px;
-	height: 45px;
-	cursor: pointer;
-	font-size: 20px;
-	box-shadow: 0px 2px 8px rgba(0,0,0,0.2);
-	margin: 2px 0;
+	cursor: grab;
+	position: absolute;
+	top: 40px;
+	transition: background 0.3s;
 }
 
-	.scroll-buttons button:hover {
-	background: #ddd;
+.scroll-thumb:active {
+	cursor: grabbing;
+	background: #1e40af;
 }
 
 @media (min-width: 768px) {
@@ -222,9 +230,8 @@ h1:hover {
 	<p>Huaral - Perú</p>
 </footer>
 
-<div class="scroll-buttons">
-	<button onclick="irArriba()">⬆️</button>
-	<button onclick="irAbajo()">⬇️</button>
+<div class="scroll-control">
+	<div class="scroll-thumb" id="thumb"></div>
 </div>
 	
 <script>
@@ -241,19 +248,79 @@ h1:hover {
 			boton.textContent = "🔊 Activar música";
 		}
 	}
-	function irArriba() {
-		window.scrollTo({
-			top: 0,
-			behavior: "smooth"
-		});
-	}
+	const thumb = document.getElementById("thumb");
+	let isDragging = false;
 
-	function irAbajo() {
+	thumb.addEventListener("mousedown", () => {
+		isDragging = true;
+	});
+
+	document.addEventListener("mouseup", () => {
+		isDragging = false;
+	});
+
+	document.addEventListener("mousemove", (e) => {
+		if (!isDragging) return;
+
+		const control = document.querySelector(".scroll-control");
+		const rect = control.getBoundingClientRect();
+
+		let y = e.clientY - rect.top;
+
+		// Limitar dentro del contenedor
+		if (y < 10) y = 10;
+		if (y > rect.height - 40) y = rect.height - 40;
+
+		thumb.style.top = y + "px";
+
+		// Convertir posición a scroll
+		const porcentaje = y / (rect.height - 40);
+		const scrollTotal = document.body.scrollHeight - window.innerHeight;
+
 		window.scrollTo({
-			top: document.body.scrollHeight,
-			behavior: "smooth"
+			top: porcentaje * scrollTotal
 		});
-	}
+	});
+	thumb.addEventListener("touchstart", () => {
+	isDragging = true;
+});
+
+document.addEventListener("touchend", () => {
+	isDragging = false;
+});
+
+document.addEventListener("touchmove", (e) => {
+	if (!isDragging) return;
+
+	const touch = e.touches[0];
+	const control = document.querySelector(".scroll-control");
+	const rect = control.getBoundingClientRect();
+
+	let y = touch.clientY - rect.top;
+
+	if (y < 10) y = 10;
+	if (y > rect.height - 40) y = rect.height - 40;
+
+	thumb.style.top = y + "px";
+
+	const porcentaje = y / (rect.height - 40);
+	const scrollTotal = document.body.scrollHeight - window.innerHeight;
+
+	window.scrollTo({
+		top: porcentaje * scrollTotal
+	});
+});
+window.addEventListener("scroll", () => {
+	const control = document.querySelector(".scroll-control");
+	const rect = control.getBoundingClientRect();
+	const scrollTop = window.scrollY;
+	const scrollTotal = document.body.scrollHeight - window.innerHeight;
+
+	const porcentaje = scrollTop / scrollTotal;
+	const posicion = porcentaje * (rect.height - 40);
+
+	thumb.style.top = posicion + "px";
+});
 </script>
 	
 </body>
