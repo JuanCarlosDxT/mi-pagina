@@ -131,45 +131,6 @@ h1:hover {
 	min-width: 200px;
 }
 
-	.scroll-control {
-	position: fixed;
-	right: 10px;
-	top: 50%;
-	transform: translateY(-50%);
-	width: 50px;
-	height: 120px;
-	background: #e5e7eb;
-	border-radius: 25px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
-	z-index: 1000;
-	user-select: none;
-	opacity: 0.8;
-	transition: opacity 0.3s;
-}
-
-.scroll-control:hover {
-	opacity: 1;
-}
-
-.scroll-thumb {
-	width: 35px;
-	height: 35px;
-	background: #2563eb;
-	border-radius: 50%;
-	cursor: grab;
-	position: absolute;
-	top: 40px;
-	transition: background 0.3s;
-}
-
-.scroll-thumb:active {
-	cursor: grabbing;
-	background: #1e40af;
-}
-
 @media (min-width: 768px) {
 	.scroll-buttons {
 		display: none;
@@ -248,79 +209,7 @@ h1:hover {
 			boton.textContent = "🔊 Activar música";
 		}
 	}
-	const thumb = document.getElementById("thumb");
-	let isDragging = false;
-
-	thumb.addEventListener("mousedown", () => {
-		isDragging = true;
-	});
-
-	document.addEventListener("mouseup", () => {
-		isDragging = false;
-	});
-
-	document.addEventListener("mousemove", (e) => {
-		if (!isDragging) return;
-
-		const control = document.querySelector(".scroll-control");
-		const rect = control.getBoundingClientRect();
-
-		let y = e.clientY - rect.top;
-
-		// Limitar dentro del contenedor
-		if (y < 10) y = 10;
-		if (y > rect.height - 40) y = rect.height - 40;
-
-		thumb.style.top = y + "px";
-
-		// Convertir posición a scroll
-		const porcentaje = y / (rect.height - 40);
-		const scrollTotal = document.body.scrollHeight - window.innerHeight;
-
-		window.scrollTo({
-			top: porcentaje * scrollTotal
-		});
-	});
-	thumb.addEventListener("touchstart", () => {
-	isDragging = true;
-});
-
-document.addEventListener("touchend", () => {
-	isDragging = false;
-});
-
-document.addEventListener("touchmove", (e) => {
-	if (!isDragging) return;
-
-	const touch = e.touches[0];
-	const control = document.querySelector(".scroll-control");
-	const rect = control.getBoundingClientRect();
-
-	let y = touch.clientY - rect.top;
-
-	if (y < 10) y = 10;
-	if (y > rect.height - 40) y = rect.height - 40;
-
-	thumb.style.top = y + "px";
-
-	const porcentaje = y / (rect.height - 40);
-	const scrollTotal = document.body.scrollHeight - window.innerHeight;
-
-	window.scrollTo({
-		top: porcentaje * scrollTotal
-	});
-});
-window.addEventListener("scroll", () => {
-	const control = document.querySelector(".scroll-control");
-	const rect = control.getBoundingClientRect();
-	const scrollTop = window.scrollY;
-	const scrollTotal = document.body.scrollHeight - window.innerHeight;
-
-	const porcentaje = scrollTop / scrollTotal;
-	const posicion = porcentaje * (rect.height - 40);
-
-	thumb.style.top = posicion + "px";
-});
+	
 </script>
 	
 </body>
